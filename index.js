@@ -6,10 +6,17 @@ const app = express()
 const port = 3000
 
 const url = 'mongodb://localhost:27017'
-const dbname = 'pengRats';
-const Client = new MongoClient(url)
+const dbname = 'todos';
+const Client = new MongoClient(url, { useNewUrlParser: true })
 
 var jsonParser = bodyParser.json()
+
+// enable CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 //get all uncompleted todos
 app.get('/todos', function (req, res) {
@@ -88,7 +95,7 @@ var completeTodo = function(db, id, callback) {
 
 var getAllTodos = function (db, callback) {
     var collection = db.collection('todos')
-    collection.find({"completed": {$exists: false}}).toArray(function (err, documents) {
+    collection.find().toArray(function (err, documents) {
         callback(documents)
     })
 }
