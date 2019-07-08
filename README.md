@@ -1,4 +1,4 @@
 # nodeTodoMongoDB
 
-- Requires a mongoDb database called 'pengRats' and a collection called 'todos'
-- remember to npm install all the packages required at the top of index.js
+- Requires a mongoDb database called 'todos' and a collection called 'todos'
+- Run `npm i` from this folder to install all packages
